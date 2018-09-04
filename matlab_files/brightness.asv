@@ -1,0 +1,30 @@
+% Controle de brilho em imagens RGB
+
+img = imread('mulher.jpg'); %le a imagem
+
+%imshow(img);
+% Para adicionar brilho aditivo em uma imagem,
+% basta somar um valor a imagem.
+n = 100; % valor do brilho a ser somado.
+
+% Extrai as bandas individuais
+red_channel = img( :, :, 1);
+green_channel = img( :, :, 2);
+blue_channel = img( :, :, 3);
+
+% Soma o valor N de brilho p
+red_bright = red_channel + n;
+green_bright = green_channel + n;
+blue_bright = blue_channel + n;
+
+image_final = cat(3, red_bright, green_bright, blue_bright);
+
+imshow(image_final);
+
+% Para adicionar brilho multiplicativo em uma imagem,
+% basta multiplicar um valor real a imagem.
+img_mult = img * 10.0;
+
+%imshow(img_mult);
+
+%imshow(img);
