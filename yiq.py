@@ -2,6 +2,8 @@ import numpy as np
 from PIL import Image
 from math import ceil
 
+
+#Gera um array de pontos R,G e B para serem convertidos
 def image2array(image):
     img = np.zeros((image.height, image.width, 3), 'uint8')
     
@@ -15,6 +17,7 @@ def image2array(image):
             
     return img
 
+#Usa os cálculos de conversão para transformar os valores RGB em YIQ e depois divide por 255 para se ter valores percentuais
 def rgb2yiq(image):
     yiq = np.zeros((image.height, image.width, 3), 'float32')
 
@@ -29,6 +32,7 @@ def rgb2yiq(image):
 
     return yiq
 
+#Faz o procedimento inverso a função anterior, onde retorna de percentual para 0 a 255 e depois transformar os valores de yiq usando o R como base para o calculo
 def yiq2rgb(yiq, width, height):
     rgb = np.zeros((height, width, 3), 'uint8')
 
