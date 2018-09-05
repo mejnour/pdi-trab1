@@ -23,13 +23,12 @@ def main():
         print("\nMenu Principal:\n")
         print("1 - Brilho")
         print("2 - Canais")
-        print("3 - Convolucao")
+        print("3 - Sobel/Laplace")
         print("4 - Filtros")
         print("5 - Media e Mediana")
         print("6 - Negativo")
-        print("7 - Sobel/Laplace")
-        print("8 - Limiarizacao")
-        print("9 - Arquivo")
+        print("7 - Limiarizacao")
+        print("8 - Arquivo")
         print("0 - Sair")
         destiny = int(input("> "))
 
@@ -40,7 +39,7 @@ def main():
             canais.main(path)
 
         elif destiny == 3:
-            convo.main(path)
+            sobel.main(path)
 
         elif destiny == 4:
             filtros.main(path)
@@ -52,12 +51,10 @@ def main():
             negativo.main(path)
 
         elif destiny == 7:
-            sobel.main(path)
-
-        elif destiny == 8:
             thres.main(path)
 
-        elif destiny == 9:
+        
+        elif destiny == 8:
             print("\nChoose Your File:\n")
             path = str(input("> "))
 

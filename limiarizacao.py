@@ -6,7 +6,7 @@ import sys
 
 # Limiarização pré definida, aqui se faz um limiar usando o valor enviado pelo
 # usuário, após dividido por 255 o valor é então usado como comparador para
-# se alterar o valor de Y entre 1 e 0, melhorando os ruídos
+# se alterar o valor de Y entre 1 e 0
 def threshold_user(image, thresh):
     thresh /= 255
 
