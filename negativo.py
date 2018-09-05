@@ -85,7 +85,7 @@ def negative_y(image, width, height):
 def main(path):
 
     img = Image.open(path)  # abre a imagem passada como argumento
-sys.exit(0)
+
     while 1:
         print("\n\tMenu Negativo:\n")
         print("\t1 - Aplicar negativo em RGB")
