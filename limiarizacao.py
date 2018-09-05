@@ -25,7 +25,7 @@ def threshold_user(image, thresh):
     return img
 
 
-# Nessa limiarização, é feito o cálculo de uma média de todos os pixels,
+# Nessa limiarização, é feito o cálculo da média de Y em todos os pixels,
 # dividido por sua quantidade, e então é usado como comparativo para alterar
 # o valor de y entre 1 e 0
 def threshold_mean(image):
