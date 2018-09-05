@@ -3,21 +3,23 @@ from PIL import Image
 from math import ceil
 
 
-#Gera um array de pontos R,G e B para serem convertidos
+# Gera um array de pontos R,G e B para serem convertidos
 def image2array(image):
     img = np.zeros((image.height, image.width, 3), 'uint8')
-    
+
     for j in range(image.height):
         for i in range(image.width):
             r, g, b = image.getpixel((i, j))
-            
+
             img[j, i, 0] = r
             img[j, i, 1] = g
             img[j, i, 2] = b
-            
+
     return img
 
-#Usa os cálculos de conversão para transformar os valores RGB em YIQ e depois divide por 255 para se ter valores percentuais
+
+# Usa os cálculos de conversão para transformar os valores RGB em YIQ e depois
+# divide por 255 para se ter valores percentuais
 def rgb2yiq(image):
     yiq = np.zeros((image.height, image.width, 3), 'float32')
 
@@ -32,16 +34,19 @@ def rgb2yiq(image):
 
     return yiq
 
-#Faz o procedimento inverso a função anterior, onde retorna de percentual para 0 a 255 e depois transformar os valores de yiq usando o R como base para o calculo
+
+# Faz o procedimento inverso a função anterior, onde retorna de percentual para
+# 0 a 255 e depois transformar os valores de yiq usando o R como base para o
+# calculo
 def yiq2rgb(yiq, width, height):
     rgb = np.zeros((height, width, 3), 'uint8')
 
     for j in range(height):
         for i in range(width):
-            y = yiq[j, i, 0]*255
-            ii = yiq[j, i, 1]*255
-            q = yiq[j, i, 2]*255
-            
+            y = yiq[j, i, 0] * 255
+            ii = yiq[j, i, 1] * 255
+            q = yiq[j, i, 2] * 255
+
             r = ceil(y + 0.956*ii + 0.621*q)
             r = min(r, 255)
             r = max(r, 0)
@@ -51,7 +56,7 @@ def yiq2rgb(yiq, width, height):
             b = ceil(y - 1.106*ii + 1.703*q)
             b = min(b, 255)
             b = max(b, 0)
-            
+
             rgb[j, i, 0] = r
             rgb[j, i, 1] = g
             rgb[j, i, 2] = b
@@ -60,16 +65,14 @@ def yiq2rgb(yiq, width, height):
 
     return rgb
 
+
 def rgb2gray(img):
     yiq = rgb2yiq(img)
     grey = np.zeros((img.height, img.width, 3), 'uint8')
     for j in range(img.height):
         for i in range(img.width):
-            grey[j,i,0] = yiq[j,i,0]*255
-            grey[j,i,1] = yiq[j,i,0]*255
-            grey[j,i,2] = yiq[j,i,0]*255
-            
+            grey[j, i, 0] = yiq[j, i, 0] * 255
+            grey[j, i, 1] = yiq[j, i, 0] * 255
+            grey[j, i, 2] = yiq[j, i, 0] * 255
+
     return Image.fromarray(grey)
-
-
-
