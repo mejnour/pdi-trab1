@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 import numpy as np
 from PIL import Image
-import sys
 
 
 def image_split_monochromatic(image):
-    # cria um array multidimensional(1x1x3) preenchido por zeros usando as dimensões da
-    # imagem e a quantidade de componentes que existe por cada pixel(RGB)
+    # cria um array multidimensional(1x1x3) preenchido por zeros usando as
+    # dimensões da imagem e a quantidade de componentes que existe por cada
+    # pixel(RGB)
     r = np.zeros((image.height, image.width, 3), 'uint8')
     g = np.zeros((image.height, image.width, 3), 'uint8')
     b = np.zeros((image.height, image.width, 3), 'uint8')
@@ -40,72 +40,78 @@ def image_split_color(image):
     return r, g, b
 
 
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: python " + sys.argv[0] + " image_name")
-        sys.exit(1)
-
+def main(path):
     # abre a imagem passada como argumento
-    img = Image.open(sys.argv[1])
+    img = Image.open(path)
 
-    print("1 - Exibir bandas individuais como imagens monocromáticas")
-    print("2 - Exibir bandas individuais como imagens coloridas")
+    while 1:
+        print("\n\tMenu Canais:\n")
+        print("\t1 - Exibir bandas individuais como imagens monocromáticas")
+        print("\t2 - Exibir bandas individuais como imagens coloridas")
+        print("\t0 - Voltar ao Menu Principal")
 
-    option = int(input("Selecione uma opção: "))
+        option = int(input("\t> "))
 
-    if option == 1:
-        # extrai as bandas monocromáticas
-        r, g, b = image_split_monochromatic(img)
+        if option == 1:
+            # extrai as bandas monocromáticas
+            r, g, b = image_split_monochromatic(img)
 
-        while True:
-            print("\n1 - Exibir banda R")
-            print("2 - Exibir banda G")
-            print("3 - Exibir banda B")
-            print("0 - Sair")
+            while 1:
+                print("\n\t\t1 - Exibir banda R")
+                print("\t\t2 - Exibir banda G")
+                print("\t\t3 - Exibir banda B")
+                print("\t\t0 - Voltar ao Menu Canais")
 
-            option = int(input("Selecione uma opção: "))
+                option = int(input("\t\t> "))
 
-            if option == 0:
-                break
+                if option == 0:
+                    break
 
-            elif option == 1:
-                im = Image.fromarray(r)  # constrói a imagem usando a banda monocromática r
-                im.show()  # mostra a imagem construída
+                elif option == 1:
+                    # constrói a imagem usando a banda monocromática r
+                    im = Image.fromarray(r)
+                    im.show()  # mostra a imagem construída
 
-            elif option == 2:
-                im = Image.fromarray(g)
-                im.show()
+                elif option == 2:
+                    im = Image.fromarray(g)
+                    im.show()
 
-            elif option == 3:
-                im = Image.fromarray(b)
-                im.show()
+                elif option == 3:
+                    im = Image.fromarray(b)
+                    im.show()
 
-    else:
-        r, g, b = image_split_color(img)  # extrai bandas coloridas
+                elif option == 0:
+                    break
 
-        while True:
-            print("\n1 - Exibir banda R")
-            print("2 - Exibir banda G")
-            print("3 - Exibir banda B")
-            print("0 - Sair")
+        elif option == 2:
+            r, g, b = image_split_color(img)  # extrai bandas coloridas
 
-            option = int(input("Selecione uma opção: "))
+            while 1:
+                print("\n\t\t1 - Exibir banda R")
+                print("\t\t2 - Exibir banda G")
+                print("\t\t3 - Exibir banda B")
+                print("\t\t0 - Voltar ao Menu Canais")
 
-            if option == 0:
-                break
+                option = int(input("\t\t> "))
 
-            elif option == 1:
-                im = Image.fromarray(r)  # constrói a imagem usando a banda colorida r
-                im.show()  # mostra a imagem construída
+                if option == 0:
+                    break
 
-            elif option == 2:
-                im = Image.fromarray(g)
-                im.show()
+                elif option == 1:
+                    # constrói a imagem usando a banda colorida r
+                    im = Image.fromarray(r)
+                    im.show()  # mostra a imagem construída
 
-            elif option == 3:
-                im = Image.fromarray(b)
-                im.show()
+                elif option == 2:
+                    im = Image.fromarray(g)
+                    im.show()
 
+                elif option == 3:
+                    im = Image.fromarray(b)
+                    im.show()
 
-if __name__ == "__main__":
-    main()
+                elif option == 0:
+                    break
+
+        elif option == 0:
+            return
