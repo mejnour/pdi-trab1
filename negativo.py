@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import yiq
 from PIL import Image
@@ -6,14 +5,17 @@ import sys
 
 
 def negative(image):
-    # cria um array multidimensional(1x1x3) preenchido por zeros usando as dimensões da
+    # cria um array multidimensional(1x1x3) preenchido por zeros usando as
+    # dimensões da
     neg = np.zeros((image.height, image.width, 3), 'uint8')
     # imagem e a quantidade de componentes que existe por cada pixel(RGB)
     for i in range(image.width):
         for j in range(image.height):  # percorre todos os pixels da imagem
-            r, g, b = image.getpixel((i, j))  # retorna os valores de r ,g e b do pixel(i,j)
+            r, g, b = image.getpixel((i, j))  # retorna os valores de r ,g e b
+            # do pixel(i,j)
 
-            neg[j, i, 0] = 255 - r  # subtrai de 255 o valor capturado em r do pixel
+            # subtrai de 255 o valor capturado em r, g e b do pixel
+            neg[j, i, 0] = 255 - r
             neg[j, i, 1] = 255 - g
             neg[j, i, 2] = 255 - b
 
@@ -26,7 +28,8 @@ def negativeR(image):
         for j in range(image.height):
             r, g, b = image.getpixel((i, j))
 
-            neg[j, i, 0] = 255 - r  # subtrai de 255 o valor capturado em r do pixel
+            # subtrai de 255 o valor capturado em r do pixel
+            neg[j, i, 0] = 255 - r
             neg[j, i, 1] = g
             neg[j, i, 2] = b
 
@@ -40,7 +43,8 @@ def negativeG(image):
             r, g, b = image.getpixel((i, j))
 
             neg[j, i, 0] = r
-            neg[j, i, 1] = 255 - g  # subtrai de 255 o valor capturado em g do pixel
+            # subtrai de 255 o valor capturado em g do pixel
+            neg[j, i, 1] = 255 - g
             neg[j, i, 2] = b
 
     return neg
@@ -54,7 +58,8 @@ def negativeB(image):
 
             neg[j, i, 0] = r
             neg[j, i, 1] = g
-            neg[j, i, 2] = 255 - b  # subtrai de 255 o valor capturado em b do pixel
+            # subtrai de 255 o valor capturado em b do pixel
+            neg[j, i, 2] = 255 - b
 
     return neg
 
@@ -77,54 +82,54 @@ def negative_y(image, width, height):
     return neg
 
 
-def main():
-    if len(sys.argv) < 2:
-        print("Usage: python " + sys.argv[0] + " image_name")
-        sys.exit(1)
+def main(path):
 
-    img = Image.open(sys.argv[1])  # abre a imagem passada como argumento
+    img = Image.open(path)  # abre a imagem passada como argumento
+sys.exit(0)
+    while 1:
+        print("\n\tMenu Negativo:\n")
+        print("\t1 - Aplicar negativo em RGB")
+        print("\t2 - Aplicar negativo em R")
+        print("\t3 - Aplicar negativo em G")
+        print("\t4 - Aplicar negativo em B")
+        print("\t5 - Aplicar negativo em Y")
+        print("\t0 - Voltar ao Menu Principal")
 
-    print("1 - Aplicar negativo em RGB")
-    print("2 - Aplicar negativo em R")
-    print("3 - Aplicar negativo em G")
-    print("4 - Aplicar negativo em B")
-    print("5 - Aplicar negativo em Y")
-    print("0 - Sair")
+        option = int(input("Selecione uma opção: "))
 
-    option = int(input("Selecione uma opção: "))
+        if option == 1:
+            # retorna um array após deixar as cores negativas em RGB
+            im = negative(img)
+            im = Image.fromarray(im)  # constrói a imagem
+            im.show()  # mostra a imagem construída
 
-    if option == 1:
-        im = negative(img)  # retorna um array após deixar as cores negativas em RGB
-        im = Image.fromarray(im)  # constrói a imagem
-        im.show()  # mostra a imagem construída
+        elif option == 2:
+            # retorna um array após deixar as cores negativas em R
+            im = negativeR(img)
+            im = Image.fromarray(im)
+            im.show()
 
-    elif option == 2:
-        im = negativeR(img)  # retorna um array após deixar as cores negativas em R
-        im = Image.fromarray(im)
-        im.show()
+        elif option == 3:
+            # retorna um array após deixar as cores negativas em G
+            im = negativeG(img)
+            im = Image.fromarray(im)
+            im.show()
 
-    elif option == 3:
-        im = negativeG(img)  # retorna um array após deixar as cores negativas em G
-        im = Image.fromarray(im)
-        im.show()
+        elif option == 4:
+            # retorna um array após deixar as cores negativas em B
+            im = negativeB(img)
+            im = Image.fromarray(im)
+            im.show()
 
-    elif option == 4:
-        im = negativeB(img)  # retorna um array após deixar as cores negativas em B
-        im = Image.fromarray(im)
-        im.show()
+        elif option == 5:
+            # converte a imagem de rgb para yiq
+            im = yiq.rgb2yiq(img)
+            # utiliza a nossa função para deixar deixar a imagem negativa
+            im = negative_y(im, img.width, img.height)
+            # converte de yiq para rgb
+            im = yiq.yiq2rgb(im, img.width, img.height)
+            im = Image.fromarray(im)
+            im.show()
 
-    elif option == 5:
-        # converte a imagem de rgb para yiq
-        im = yiq.rgb2yiq(img)
-        # utiliza a nossa função para deixar deixar a imagem negativa
-        im = negative_y(im, img.width, img.height)
-        im = yiq.yiq2rgb(im, img.width, img.height)  # converte de yiq para rgb
-        im = Image.fromarray(im)
-        im.show()
-
-    else:
-        sys.exit(0)
-
-
-if __name__ == "__main__":
-    main()
+        else:
+            return
