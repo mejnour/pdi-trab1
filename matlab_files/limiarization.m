@@ -1,6 +1,6 @@
 % Exemplos de Limiarização
 
-img = imread('iMG_0103.png');
+img = imread('porta.jpg');
 img = rgb2gray(img);
 
 %histogram(img);

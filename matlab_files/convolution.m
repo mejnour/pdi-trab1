@@ -1,6 +1,6 @@
 %Convolução SOBEL / MEDIA
 
-img = imread('tigre.png');
+img = imread('porta.jpg');
 img = rgb2gray(img); %transforma a imagem em niveis de cinza
 
 % ------- DETECÇÃO DE BORDAS DE SOBEL ------- 

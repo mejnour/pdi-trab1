@@ -1,5 +1,5 @@
 % Exibe bandas individuais R,G,B
-img = imread('mulher.jpg');
+img = imread('porta.jpg');
 
 % Extrai os canais individuais de RGB
 % Eles estão em escala monocromática de cinza
